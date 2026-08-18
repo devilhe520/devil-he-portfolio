@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { caseOverviews } from "./data/case-overviews";
 
@@ -504,7 +505,7 @@ export default function Home() {
           </div>
           <figure className="portrait-wrap">
             <div className="portrait-number">{c.profile}</div>
-            <img src="/devil-he-profile.jpg" alt="Devil He portrait" />
+            <Image src="/devil-he-profile.jpg" width={930} height={1241} sizes="(max-width: 700px) 58vw, 240px" alt="Devil He portrait" priority />
           </figure>
         </div>
       </section>
@@ -542,7 +543,7 @@ export default function Home() {
             <article className={`project-card ${project.tone}${isExpanded ? " details-open" : ""}`} key={project.brand}>
               <div className="project-top"><span>{project.index}</span><span>{project.period}</span></div>
               <div className="project-visual">
-                <img src={project.image} style={{ objectPosition: project.imagePosition }} alt="" loading="lazy" />
+                <Image src={project.image} width={1400} height={1000} sizes="(max-width: 700px) 100vw, 50vw" style={{ objectPosition: project.imagePosition }} alt="" />
               </div>
               <div className="project-content">
                 <p className="project-role">{local(project.role, lang)}</p>
@@ -566,7 +567,7 @@ export default function Home() {
                       <section className="project-detail-row" key={section.number}>
                         <span>{section.number}</span>
                         <figure className="project-detail-visual">
-                          <img src={project.detailImages[sectionIndex]} alt="" loading="lazy" />
+                          <Image src={project.detailImages[sectionIndex]} width={720} height={480} sizes="(max-width: 700px) 85vw, 180px" alt="" />
                         </figure>
                         <div><h5>{local(section.title, lang)}</h5><p>{local(section.body, lang)}</p></div>
                       </section>
@@ -617,7 +618,7 @@ export default function Home() {
           {strategyCases.map((item, index) => (
             <article className="strategy-card" key={item.brand}>
               <div className={`strategy-media ${item.tone}`}>
-                <img src={item.image} alt="" loading="lazy" />
+                <Image src={item.image} width={1400} height={1000} sizes="(max-width: 700px) 100vw, 33vw" alt="" />
                 <span className="strategy-index">{String(index + 1).padStart(2, "0")}</span>
                 <strong>{item.visual}</strong>
               </div>
@@ -633,7 +634,7 @@ export default function Home() {
       </section>
 
       <section className="about-section" id="about">
-        <div className="about-photo"><img src="/devil-he-profile.jpg" alt="Devil He in Shanghai" /><span>Devil He — Shanghai</span></div>
+        <div className="about-photo"><Image src="/devil-he-profile.jpg" width={930} height={1241} sizes="(max-width: 900px) 100vw, 50vw" alt="Devil He in Shanghai" /><span>Devil He — Shanghai</span></div>
         <div className="about-content">
           <SectionLabel number="06" icon="experience" light>{c.experienceLabel}</SectionLabel>
           <h2><Multiline>{c.experienceTitle}</Multiline></h2>
@@ -655,7 +656,7 @@ export default function Home() {
         <div className="brand-visual-wall">
           {brandVisuals.map((item) => (
             <figure className={item.className} key={item.brand}>
-              <img src={item.image} style={{ objectPosition: item.objectPosition }} alt={`${item.brand} brand environment`} loading="lazy" />
+              <Image src={item.image} width={1400} height={1000} sizes="(max-width: 700px) 100vw, 50vw" style={{ objectPosition: item.objectPosition }} alt={`${item.brand} brand environment`} />
               <figcaption><strong>{item.brand}</strong></figcaption>
             </figure>
           ))}
@@ -688,7 +689,7 @@ export default function Home() {
           {beyondWorkCards.map((item) => (
             <article className="beyond-card" key={item.num}>
               <div className="beyond-image">
-                <img src={item.image} alt="" />
+                <Image src={item.image} width={1400} height={1000} sizes="(max-width: 700px) 100vw, 33vw" alt="" />
                 <span>{c.lifestyleReference}</span>
               </div>
               <div className="beyond-card-top"><LineIcon name={item.icon} /><span>{item.num}</span></div>

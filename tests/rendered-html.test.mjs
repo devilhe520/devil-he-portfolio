@@ -1,17 +1,37 @@
 import assert from "node:assert/strict";
+import { spawn } from "node:child_process";
 import { access } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
+const port = 3217;
+let server;
 
-  return worker.fetch(
-    new Request("http://localhost/", { headers: { accept: "text/html" } }),
-    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
-    { waitUntil() {}, passThroughOnException() {} },
-  );
+test.before(async () => {
+  server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "-H", "127.0.0.1", "-p", String(port)], {
+    cwd: new URL("..", import.meta.url),
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+
+  const deadline = Date.now() + 20_000;
+  while (Date.now() < deadline) {
+    if (server.exitCode !== null) throw new Error(`Next.js exited with code ${server.exitCode}`);
+    try {
+      const response = await fetch(`http://127.0.0.1:${port}/`);
+      if (response.ok) return;
+    } catch (error) {
+      if (Date.now() >= deadline) throw error;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+  throw new Error("Next.js did not become ready in time");
+});
+
+test.after(() => {
+  server?.kill("SIGTERM");
+});
+
+async function render() {
+  return fetch(`http://127.0.0.1:${port}/`, { headers: { accept: "text/html" } });
 }
 
 test("server-renders the Devil He portfolio", async () => {
@@ -42,6 +62,10 @@ test("includes distinct public case images", async () => {
 
   const html = await (await render()).text();
   for (const asset of assets) {
-    assert.match(html, new RegExp(asset.replace("../public", "")));
+    const publicPath = asset.replace("../public", "");
+    assert.ok(
+      html.includes(publicPath) || html.includes(encodeURIComponent(publicPath)),
+      `Rendered HTML should reference ${publicPath}`,
+    );
   }
 });

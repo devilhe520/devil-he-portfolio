@@ -10,11 +10,11 @@ The site presents selected delivery work, digital experience strategy, Global-to
 - Responsive desktop and mobile layouts
 - In-page case overviews with selected public imagery
 - Luxury, fashion, sports and digital consumer brand experience
-- Vinext / React implementation prepared for Cloudflare hosting
+- Next.js App Router implementation prepared for Vercel hosting
 
 ## Local development
 
-Requires Node.js `>=22.13.0`.
+Requires Node.js `22.x`.
 
 ```bash
 npm install
@@ -22,6 +22,15 @@ npm run dev
 ```
 
 Open `http://localhost:3000/`.
+
+## Deploy to Vercel
+
+Import `devilhe520/devil-he-portfolio` in Vercel. The repository is configured as a standard Next.js project and requires no environment variables.
+
+- Framework preset: Next.js
+- Build command: `npm run build` (Next.js Webpack production build)
+- Output directory: leave empty (managed by Next.js)
+- Node.js: 22.x
 
 ## Verification
 

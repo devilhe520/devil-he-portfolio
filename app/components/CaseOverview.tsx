@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { CaseLanguage, CaseOverviewData, CaseText } from "../data/case-overviews";
 
@@ -65,7 +66,15 @@ export default function CaseOverview({ data }: { data: CaseOverviewData }) {
       </section>
 
       <figure className="case-cover">
-        <img src={data.image} style={{ objectPosition: data.imagePosition ?? "center" }} alt="" loading="eager" />
+        <Image
+          src={data.image}
+          width={1800}
+          height={1200}
+          sizes="100vw"
+          style={{ objectPosition: data.imagePosition ?? "center" }}
+          alt=""
+          priority
+        />
         <figcaption>{c.visual}</figcaption>
       </figure>
 
