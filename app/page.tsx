@@ -235,19 +235,33 @@ const brandGroups = [
   {
     title: { zh: "奢品 / 时尚", en: "Luxury / Fashion" },
     brands: [
-      ["T&Co.", "Tiffany & Co."], ["GG", "Gucci"], ["C", "Chloé"], ["B", "Balenciaga"],
-      ["M", "MCM"], ["J", "JACQUEMUS"], ["D", "Dunhill"], ["CG", "Canada Goose"],
+      { name: "Tiffany & Co.", logo: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Tiffany%20%26%20Co.%202024%20logo.svg", kind: "standard" },
+      { name: "Gucci", logo: "/brand-logos/gucci-official.svg", kind: "standard" },
+      { name: "Chloé", logo: "/brand-logos/chloe.svg", kind: "standard" },
+      { name: "Balenciaga", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Balenciaga2017Logo.svg", kind: "standard" },
+      { name: "MCM", logo: "/brand-logos/mcm-official.svg", kind: "standard logo-invert-source" },
+      { name: "JACQUEMUS", logo: "/brand-logos/jacquemus-official.svg", kind: "standard" },
+      { name: "Canada Goose", logo: "https://upload.wikimedia.org/wikipedia/commons/8/84/Canada_Goose_2023_logo.svg", kind: "standard" },
     ],
   },
   {
     title: { zh: "运动 / 生活", en: "Sports / Lifestyle" },
     brands: [
-      ["N", "Nike"], ["K", "KAILAS"], ["RB", "Ray-Ban"], ["C", "Coach"], ["G", "Gap"], ["R", "Reebok"],
+      { name: "Nike", logo: "/brand-logos/nike.svg", kind: "symbol" },
+      { name: "KAILAS", logo: "/brand-logos/kailas.png", kind: "badge" },
+      { name: "Ray-Ban", logo: "/brand-logos/ray-ban-official.svg", kind: "standard logo-rayban-scale" },
+      { name: "Coach", logo: "/brand-logos/coach-official.svg", kind: "standard" },
+      { name: "Gap", logo: "/brand-logos/gap.svg", kind: "badge" },
+      { name: "Reebok", logo: "/brand-logos/reebok.svg", kind: "symbol" },
     ],
   },
   {
     title: { zh: "数字 / 消费", en: "Digital / Consumer" },
-    brands: [["S", "Sotheby’s"], ["MI", "Michelin"], ["EA", "Electronic Arts"]],
+    brands: [
+      { name: "Sotheby’s", logo: "/brand-logos/sothebys-official.svg", kind: "standard" },
+      { name: "Michelin", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Michelin_Wordmark.svg", kind: "standard" },
+      { name: "Armani", logo: "/brand-logos/armani-official.svg", kind: "standard" },
+    ],
   },
 ];
 
@@ -262,6 +276,11 @@ const beyondWorkCards = [
   {
     num: "01",
     image: "/lifestyle-visuals/training.jpg",
+    images: [
+      "/lifestyle-visuals/training-01.jpg",
+      "/lifestyle-visuals/training-02.jpg",
+      "/lifestyle-visuals/training-03.jpg",
+    ],
     icon: "training" as const,
     title: { zh: "综合体能训练", en: "Functional Fitness" },
     tags: "CrossFit · HYROX · Strength & Conditioning",
@@ -273,6 +292,12 @@ const beyondWorkCards = [
   {
     num: "02",
     image: "/lifestyle-visuals/hyrox.jpg",
+    images: [
+      "/lifestyle-visuals/competition-03.jpg",
+      "/lifestyle-visuals/competition-01.jpg",
+      "/lifestyle-visuals/competition-02.jpg",
+      "/lifestyle-visuals/competition-04.jpg",
+    ],
     icon: "competition" as const,
     title: { zh: "赛事与挑战", en: "Competition" },
     tags: "Quanli Games · XP · HYROX Men’s Individual Pro",
@@ -284,6 +309,11 @@ const beyondWorkCards = [
   {
     num: "03",
     image: "/lifestyle-visuals/outdoor.jpg",
+    images: [
+      "/lifestyle-visuals/outdoor-01.jpg",
+      "/lifestyle-visuals/outdoor-02.jpg",
+      "/lifestyle-visuals/outdoor-03.jpg",
+    ],
     icon: "outdoor" as const,
     title: { zh: "户外与生活", en: "Outdoor Life" },
     tags: "Outdoor · Energy · Perspective",
@@ -309,7 +339,7 @@ const copy = {
     numbers: ["数字体验设计经验", "服务国际品牌", "设计项目管理经验", "专业项目管理认证"],
     positionLabel: "职业定位",
     positionLead: "我把复杂业务转译为清晰、可落地的数字体验。",
-    positionEm: "从洞察与架构，到设计统筹、开发协同和上线交付。",
+    positionEm: "从洞察与架构，到设计统筹、\n开发协同和上线交付。",
     pillars: [
       ["Global-to-China", "品牌本土化", "熟悉全球品牌规范与中国数字消费生态，在品牌一致性与本地体验之间建立平衡。"],
       ["End-to-end UX", "完整设计交付", "从需求拆解、信息架构与核心方案，到开发协作、UAT 和上线质量把控。"],
@@ -333,7 +363,7 @@ const copy = {
     capabilitiesIntro: "从消费者洞察、信息架构与交互设计，到设计统筹、开发协同和上线交付；不只提出方向，也理解设计如何被真正使用。",
     capabilityModelKicker: "工作模型",
     capabilityModelTitle: "从问题到上线",
-    capabilitySkillsKicker: "专业能力 / What I bring",
+    capabilitySkillsKicker: "专业能力",
     capabilityModelSteps: [
       ["01", "洞察", "消费者 / 业务 / 品牌"],
       ["02", "设计", "架构 / 交互 / 原型"],
@@ -424,7 +454,7 @@ function Multiline({ children }: { children: string }) {
   return <>{parts.map((part, index) => <span key={part}>{part}{index < parts.length - 1 && <br />}</span>)}</>;
 }
 
-type LineIconName = "position" | "delivery" | "strategy" | "capability" | "experience" | "brands" | "training" | "competition" | "outdoor" | "mail" | "phone" | "download" | "work";
+type LineIconName = "position" | "delivery" | "strategy" | "capability" | "experience" | "brands" | "training" | "competition" | "outdoor" | "mail" | "message" | "phone" | "download" | "work";
 
 function LineIcon({ name }: { name: LineIconName }) {
   const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.35, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
@@ -439,6 +469,7 @@ function LineIcon({ name }: { name: LineIconName }) {
     competition: <><path d="M8 4h8v4c0 3-1.5 5-4 6-2.5-1-4-3-4-6V4Z" /><path d="M8 6H5v2c0 2 1.5 3 3.5 3M16 6h3v2c0 2-1.5 3-3.5 3M12 14v4M8 20h8" /></>,
     outdoor: <><path d="m3 19 6-10 3 5 3-4 6 9H3Z" /><path d="M16 5a2 2 0 1 0 0-4" /></>,
     mail: <><rect x="3" y="5" width="18" height="14" rx="1" /><path d="m4 7 8 6 8-6" /></>,
+    message: <><path d="M4 5h16v11H9l-5 4V5Z" /><path d="M8 9h8M8 12h5" /></>,
     phone: <><path d="M7 3h3l1 5-2 1c1.2 3 3 4.8 6 6l1-2 5 1v3c0 2-1.5 4-4 4C9 20 4 15 3 7c0-2.5 2-4 4-4Z" /></>,
     download: <><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" /></>,
     work: <><rect x="3" y="6" width="18" height="13" rx="1" /><path d="M9 6V4h6v2M3 11h18M10 11v2h4v-2" /></>,
@@ -455,6 +486,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showAllStrategy, setShowAllStrategy] = useState(false);
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [beyondSlides, setBeyondSlides] = useState([0, 0, 0]);
   const c = copy[lang];
 
   useEffect(() => {
@@ -467,6 +499,36 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
   }, [lang]);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setBeyondSlides((slides) => slides.map((value, index) =>
+        (value + 1) % beyondWorkCards[index].images.length
+      ));
+    }, 4500);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const targets = document.querySelectorAll<HTMLElement>(
+      ".numbers > div, .positioning-band > *, .section-heading > *, .project-card, .capability-intro > *, .capability-framework, .capability-row, .strategy-title, .strategy-copy, .strategy-card, .about-photo, .about-content, .brands-heading, .brand-visual-wall figure, .brand-group, .beyond-heading > *, .beyond-card, .contact-section > *"
+    );
+    targets.forEach((target, index) => {
+      target.classList.add("motion-reveal");
+      target.style.setProperty("--motion-order", String(index % 4));
+    });
+    document.documentElement.classList.add("motion-ready");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <main className={`site-shell lang-${lang}`}>
@@ -520,7 +582,7 @@ export default function Home() {
         <SectionLabel number="02" icon="position">{c.positionLabel}</SectionLabel>
         <div className="positioning-statement">
           <p>{c.positionLead}</p>
-          <span>{c.positionEm}</span>
+          <span><Multiline>{c.positionEm}</Multiline></span>
         </div>
         <div className="positioning-points">
           {c.pillars.map(([kicker, title], index) => (
@@ -536,7 +598,9 @@ export default function Home() {
           <p>{c.deliveryIntro}</p>
         </div>
         <div className="projects-grid">
-          {deliveryProjects.map((project) => {
+          {[0, 1].map((column) => (
+          <div className="project-column" key={column}>
+          {deliveryProjects.filter((_, index) => index % 2 === column).map((project) => {
             const details = caseOverviews[project.slug];
             const isExpanded = expandedProject === project.slug;
             return (
@@ -577,6 +641,8 @@ export default function Home() {
               </div>
             </article>
           );})}
+          </div>
+          ))}
         </div>
         <p className="public-overview-note">{c.publicOverview}</p>
       </section>
@@ -634,7 +700,7 @@ export default function Home() {
       </section>
 
       <section className="about-section" id="about">
-        <div className="about-photo"><Image src="/devil-he-profile.jpg" width={930} height={1241} sizes="(max-width: 900px) 100vw, 50vw" alt="Devil He in Shanghai" /><span>Devil He — Shanghai</span></div>
+        <div className="about-photo"><Image src="/devil-he-about.jpg" width={1080} height={1620} sizes="(max-width: 900px) 100vw, 50vw" alt="Devil He in Shanghai" /><span>Devil He — Shanghai</span></div>
         <div className="about-content">
           <SectionLabel number="06" icon="experience" light>{c.experienceLabel}</SectionLabel>
           <h2><Multiline>{c.experienceTitle}</Multiline></h2>
@@ -648,7 +714,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="brands-section">
+      <section id="brands" className="brands-section">
         <div className="brands-heading">
           <SectionLabel number="07" icon="brands">{c.brandsLabel}</SectionLabel>
           <strong>{c.brandsCount}</strong>
@@ -667,10 +733,12 @@ export default function Home() {
               <span>0{index + 1}</span>
               <h3>{local(group.title, lang)}</h3>
               <div className="brand-marks">
-                {group.brands.map(([mark, name]) => (
-                  <div className="brand-mark" key={name}>
-                    <strong aria-hidden="true">{mark}</strong>
-                    <small>{name}</small>
+                {group.brands.map((brand) => (
+                  <div className={`brand-mark logo-${brand.kind}${brand.logo ? "" : " wordmark-only"}`} key={brand.name}>
+                    <span className="brand-logo-frame">
+                      {brand.logo ? <img src={brand.logo} alt={`${brand.name} logo`} loading="lazy" style={brand.kind.includes("invert-source") ? { filter: "brightness(0)" } : undefined} /> : <strong>{brand.name}</strong>}
+                    </span>
+                    <small>{brand.name}</small>
                   </div>
                 ))}
               </div>
@@ -686,18 +754,27 @@ export default function Home() {
           <p>{c.beyondIntro}</p>
         </div>
         <div className="beyond-grid">
-          {beyondWorkCards.map((item) => (
+          {beyondWorkCards.map((item, cardIndex) => {
+            const carouselImages = item.images;
+            const activeSlide = beyondSlides[cardIndex] ?? 0;
+            return (
             <article className="beyond-card" key={item.num}>
-              <div className="beyond-image">
-                <Image src={item.image} width={1400} height={1000} sizes="(max-width: 700px) 100vw, 33vw" alt="" />
-                <span>{c.lifestyleReference}</span>
+              <div className={`beyond-image${carouselImages ? " beyond-carousel" : ""}`}>
+                <Image key={carouselImages[activeSlide]} src={carouselImages[activeSlide]} width={1400} height={1000} sizes="(max-width: 700px) 100vw, 33vw" alt={`${local(item.title, lang)} ${activeSlide + 1}`} />
+                {carouselImages ? (
+                  <div className="beyond-carousel-controls">
+                    <button type="button" aria-label={lang === "zh" ? "上一张" : "Previous image"} onClick={() => setBeyondSlides((slides) => slides.map((value, index) => index === cardIndex ? (value - 1 + carouselImages.length) % carouselImages.length : value))}>←</button>
+                    <span>{String(activeSlide + 1).padStart(2, "0")} / {String(carouselImages.length).padStart(2, "0")}</span>
+                    <button type="button" aria-label={lang === "zh" ? "下一张" : "Next image"} onClick={() => setBeyondSlides((slides) => slides.map((value, index) => index === cardIndex ? (value + 1) % carouselImages.length : value))}>→</button>
+                  </div>
+                ) : <span>{c.lifestyleReference}</span>}
               </div>
               <div className="beyond-card-top"><LineIcon name={item.icon} /><span>{item.num}</span></div>
               <h3>{local(item.title, lang)}</h3>
               <small>{item.tags}</small>
               <p>{local(item.description, lang)}</p>
             </article>
-          ))}
+          );})}
         </div>
       </section>
 
@@ -708,7 +785,7 @@ export default function Home() {
           <div><p>Shanghai, China</p><p>{c.roleFooter}</p></div>
           <div className="contact-links">
             <a href="mailto:devilhe520@gmail.com"><LineIcon name="mail" />devilhe520@gmail.com</a>
-            <a href="mailto:1240251878@qq.com"><LineIcon name="mail" />1240251878@qq.com</a>
+            <a href="mailto:1240251878@qq.com"><LineIcon name="message" />1240251878@qq.com</a>
             <a href="tel:+8617628040172"><LineIcon name="phone" />+86 176 2804 0172</a>
           </div>
         </div>
