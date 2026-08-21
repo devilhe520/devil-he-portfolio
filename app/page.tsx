@@ -377,9 +377,9 @@ const copy = {
     beyondTitle: "在训练与比赛中，\n持续突破边界。",
     beyondIntro: "工作之外，我长期投入 CrossFit、HYROX 等综合体能训练，同时热爱健身与户外活动。训练与竞技让我持续练习目标拆解、节奏控制，以及在压力下保持专注与稳定。",
     lifestyleReference: "运动氛围图 / 待替换为个人照片",
-    contactKicker: "期待资深 UX 与数字体验设计机会",
-    contactTitle: "一起创造真正",
-    contactEm: "有意义的体验。",
+    contactKicker: "人的洞察 × 智能技术",
+    contactTitle: "以人的洞察，",
+    contactEm: "定义 AI 时代的体验。",
     roleFooter: "资深 UX / 数字体验设计师",
     back: "返回顶部",
     footer: "为清晰而设计，为结果而落地。",
@@ -436,9 +436,9 @@ const copy = {
     beyondTitle: "Building strength.\nTesting limits.",
     beyondIntro: "Outside of design, I dedicate much of my time to CrossFit, HYROX and functional fitness, alongside strength training and outdoor activities. Training and competition continuously sharpen my discipline, pacing and ability to stay focused under pressure.",
     lifestyleReference: "Atmosphere image / replace with personal photo",
-    contactKicker: "Open to senior UX & digital experience opportunities",
-    contactTitle: "Let’s create something",
-    contactEm: "meaningful.",
+    contactKicker: "Human insight × intelligent technology",
+    contactTitle: "Human insight for",
+    contactEm: "experiences shaped by AI.",
     roleFooter: "Senior UX / Digital Experience Designer",
     back: "Back to top",
     footer: "Designed for clarity, built with intention.",
@@ -554,7 +554,7 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-kicker"><span>Shanghai, China</span><span>{c.available}</span></div>
+        <div className="hero-kicker"><span>Shanghai, China</span></div>
         <h1>{c.heroTitle}<br /><em>{c.heroEm}</em></h1>
         <div className="hero-bottom">
           <div className="hero-intro">
@@ -644,7 +644,6 @@ export default function Home() {
           </div>
           ))}
         </div>
-        <p className="public-overview-note">{c.publicOverview}</p>
       </section>
 
       <section className="capabilities-section" id="approach">
@@ -759,7 +758,7 @@ export default function Home() {
             const activeSlide = beyondSlides[cardIndex] ?? 0;
             return (
             <article className="beyond-card" key={item.num}>
-              <div className={`beyond-image${carouselImages ? " beyond-carousel" : ""}`}>
+              <div className={`beyond-image${carouselImages ? ` beyond-carousel slide-${activeSlide + 1}` : ""}`}>
                 <Image key={carouselImages[activeSlide]} src={carouselImages[activeSlide]} width={1400} height={1000} sizes="(max-width: 700px) 100vw, 33vw" alt={`${local(item.title, lang)} ${activeSlide + 1}`} />
                 {carouselImages ? (
                   <div className="beyond-carousel-controls">
